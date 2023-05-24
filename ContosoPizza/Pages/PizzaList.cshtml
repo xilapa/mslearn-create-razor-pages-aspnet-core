@@ -58,8 +58,8 @@
             <td>@pizza.Size</td>
             <td>@(pizza.IsGlutenFree ? "✔️" : string.Empty)</td>
             <td>
-                <form method="post" asp-page-handler="Delete" asp-route-id="@pizza.Id">
-                    <button class="btn btn-danger">Delete</button>
+                <form method="post" asp-page-handler="delete" asp-route-id="@pizza.Id">
+                    <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </td>
         </tr>
