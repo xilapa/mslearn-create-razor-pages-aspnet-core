@@ -1,5 +1,6 @@
 using ContosoPizza.Models;
 using ContosoPizza.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ContosoPiza.Pages
@@ -8,15 +9,27 @@ namespace ContosoPiza.Pages
     {
         private readonly PizzaService _service;
         public IList<Pizza> PizzaList { get; set; } = default!;
+        
+        [BindProperty]
+        public Pizza? NewPizza { get; set; }
 
         public PizzaListModel(PizzaService service)
         {
             _service = service;
         }
         
-        public void OnGetAsync()
+        public void OnGet()
         {
             PizzaList = _service.GetPizzas();
+        }
+
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid || NewPizza is null)
+                return Page();
+            
+            _service.AddPizza(NewPizza);
+            return RedirectToAction(nameof(OnGet));
         }
     }
 }

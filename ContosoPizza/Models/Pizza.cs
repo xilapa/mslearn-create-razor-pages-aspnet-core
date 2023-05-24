@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace ContosoPizza.Models;
 
@@ -9,6 +10,8 @@ public class Pizza
     [Required]
     public string? Name { get; set; }
     public PizzaSize Size { get; set; }
+    
+    [DisplayName("Is Gluten Free")]
     public bool IsGlutenFree { get; set; }
 
     [Range(0.01, 9999.99)]
